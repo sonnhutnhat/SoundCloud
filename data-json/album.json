@@ -7,31 +7,37 @@
     "songs": [
       {
         "idSong": 1,
+        "image": "https://i1.sndcdn.com/artworks-vNj5hOro4BnY-0-t500x500.jpg",
         "nameSong": "Right here",
         "artist": "Keshi"
       },
       {
         "idSong": 2,
+        "image": "https://i1.sndcdn.com/artworks-Yq15f6WLvKyqWI9s-4vFjpQ-t500x500.jpg",
         "nameSong": "Less of you",
         "artist": "Keshi"
       },
       {
         "idSong": 3,
+        "image": "https://dthezntil550i.cloudfront.net/g5/latest/g52110301108266660006333615/cc471988-cecc-4c8e-b880-2380066b92b5.png",
         "nameSong": "Somebody",
         "artist": "Keshi"
       },
       {
         "idSong": 4,
+        "image": "https://i1.sndcdn.com/artworks-pvfPTuvF0haK-0-t500x500.jpg",
         "nameSong": "B.Y.S",
         "artist": "Keshi"
       },
       {
         "idSong": 5,
+        "image": "https://i1.sndcdn.com/artworks-YZpFfE0MYyQDAhdj-z8vQqA-t500x500.jpg",
         "nameSong": "It's you",
         "artist": "Keshi"
       },
       {
         "idSong": 6,
+        "image": "https://i1.sndcdn.com/artworks-xf3GURBxwHumWrgs-uXy6iw-t500x500.jpg",
         "nameSong": "Limbo",
         "artist": "Keshi"
       }
@@ -44,19 +50,48 @@
     "image": "https://live.staticflickr.com/65535/53281778985_47097d27f2_n.jpg",
     "songs": [
       {
-        "idSong": 1,
-        "nameSong": "New Song 1",
-        "artist": "New Artist 1"
+        "id": 1,
+        "name": "Blinding Lights",
+        "artist": "The Weeknd",
+        "image": "https://live.staticflickr.com/65535/53281664774_b0d42bac31_n.jpg",
+        "path": "https://drive.google.com/uc?export=download&id=192Sw6oOX6zmnec-YvuxSud7Sdvt7H675"
       },
       {
-        "idSong": 2,
-        "nameSong": "New Song 2",
-        "artist": "New Artist 2"
+        "id": 2,
+        "name": "Fix You",
+        "artist": "Coldplay",
+        "image": "https://live.staticflickr.com/65535/53281664739_3cf2fc5503_w.jpg",
+        "path": "https://zingmp3.vn/bai-hat/Ban-Tin-Du-Bao-Troi-Co-Mua-JSOL/Z6BZ7OO8.html"
       },
       {
-        "idSong": 3,
-        "nameSong": "New Song 3",
-        "artist": "New Artist 3"
+        "id": 3,
+        "name": "Bad Romance",
+        "artist": "Lady Gaga",
+        "image": "https://live.staticflickr.com/65535/53281779690_b678e6466c_n.jpg",
+        "path": "https://drive.google.com/uc?export=download&id=1D52yFQ-EKgJLE5rviAi6dWKorWxgnrt6"
+
+        
+      },
+      {
+        "id": 4,
+        "name": "Lose Yourself",
+        "artist": "Eminem",
+        "image": "https://live.staticflickr.com/65535/53281664689_ce226486a8_n.jpg",
+        "path": "https://drive.google.com/uc?export=download&id=1v93H_PknddDP7aYTazXM_Cw7QEC7K6L7"
+      },
+      {
+        "id": 5,
+        "name": "Dance Monkey",
+        "artist": "Tones and I",
+        "image": "https://live.staticflickr.com/65535/53281310566_eb46351242_w.jpg",
+        "path": "https://drive.google.com/uc?export=download&id=1Y9lqTmGOgq6ZIZBXSlDYyTPYP60BOBMG"
+      },
+      {
+        "id": 6,
+        "name": "Happy",
+        "artist": "Pharrell Williams",
+        "image": "https://live.staticflickr.com/65535/53281664729_7ac9703063_w.jpg",
+        "path": "https://drive.google.com/uc?export=download&id=1epgpERCFuMIkR-pFDLhsZ9m_bwaNSMSd"
       }
     ]
   },

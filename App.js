@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from "expo-splash-screen";
 import { useCallback } from 'react';
-import { DetailAlbum, EditProfile, Settings } from './screens';
+import { DetailAlbum, EditProfile, Settings, DetailAlbumChill, SongMusic} from './screens';
 import BottomTabNav from './navigations/BottomTabNav';
 import { Login, Signup, Welcome } from "./screens";
 
@@ -78,6 +78,20 @@ export default function App() {
         <Stack.Screen
           name="Settings"
           component={Settings}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="DetailAlbumChill"
+          component={DetailAlbumChill}
+          options={{
+            headerShown: false
+          }}
+        />
+        <Stack.Screen
+          name="SongMusic"
+          component={SongMusic}
           options={{
             headerShown: false
           }}

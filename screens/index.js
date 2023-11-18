@@ -9,6 +9,8 @@ import Library from "./Library";
 import Home from "./Home";
 import DetailAlbum from "./DetailAlbum";
 import Settings from "./Settings";
+import DetailAlbumChill from "./DetailAlbumChill";
+import SongMusic from "./SongMusic";
 
 export {
     Login,
@@ -21,5 +23,7 @@ export {
     Library,
     Home,
     DetailAlbum,
-    Settings
+    Settings,
+    DetailAlbumChill,
+    SongMusic
 }

@@ -4,18 +4,59 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import COLORS from "../constants/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
-import albumData from "../data-json/album.json"; 
-import PopularAlbum from "../components/PopularAlbum";
+
+const DATA = [
+  {
+    id: 1,
+    title: "Liked Tracks",
+  },
+  {
+    id: 2,
+    title: "Playlists",
+  },
+  {
+    id: 3,
+    title: "Albums",
+  },
+  {
+    id: 4,
+    title: "Pollowing",
+  },
+  {
+    id: 5,
+    title: "Stations",
+  },
+];
+
+type ItemProps = {title: string};
+
+const Item = ({ title }: ItemProps) => (
+  <TouchableOpacity>
+    <View style={[styles.item, styles.itemContainer]}>
+      <Text style={styles.title}>{title}</Text>
+      <MaterialIcons name="navigate-next" size={24} color="black" />
+    </View>
+  </TouchableOpacity>
+);
 
 const Home = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={{ marginTop: 10 }}>
+      
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.titleContainer}>
+          <LinearGradient
+            colors={['purple', 'orange']} // Define your gradient colors here
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={{ borderRadius: 8, padding:6}}
+          >
             <Text style={styles.getnextpro}>Get Next Pro</Text>
+          </LinearGradient>
           </View>
           <View>
           <Text style={styles.library}>Library</Text>
@@ -43,7 +84,14 @@ const Home = ({ navigation }) => {
             </View>
           </View>
         </View>
-      </ScrollView>
+
+        <View>
+        <FlatList
+          data={DATA}
+          renderItem={({ item }) => <Item title={item.title} />}
+          keyExtractor={(item) => item.id.toString()} // Convert id to string
+        />
+        </View>
     </SafeAreaView>
   );
 };
@@ -90,6 +138,17 @@ const styles = StyleSheet.create({
   getnextpro: {
     fontSize: 12,
   },
+  itemContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    fontSize: 30,
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 8,
+  },
+  title: {
+    fontSize: 16,
+  }
 });
 
 export default Home;

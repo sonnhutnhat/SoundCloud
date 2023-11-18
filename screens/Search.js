@@ -15,6 +15,7 @@ const Search = () => {
         value={number}
         placeholder="Search"
         keyboardType="ascii-capable"
+        returnKeyType='done'
       />
     </View>
     </SafeAreaView>

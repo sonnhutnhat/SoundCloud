@@ -12,8 +12,8 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 
 import COLORS from '../constants/colors';
 
-const DetailAlbum = ({ route, navigation }) => {
-  const { album } = route.params;
+const DetailAlbumChill = ({ route, navigation }) => {
+  const { albumChill } = route.params;
   const [number, onChangeNumber] = React.useState('');
   const render = ({item}) => {
     return(
@@ -25,8 +25,8 @@ const DetailAlbum = ({ route, navigation }) => {
               source={{ uri: item.image }} />
             </View>
             <View>
-              <Text style={{fontWeight: "700"}}>{item.nameSong}</Text>
-              <Text>{item.artist}</Text>
+              <Text style={{fontWeight: "700"}}>{item.artist_nameSong}</Text>
+              <Text>{item.category}</Text>
             </View>
           </View>
           <View>
@@ -56,11 +56,11 @@ const DetailAlbum = ({ route, navigation }) => {
       </View>
       <View style={{display: "flex", flexDirection: "row" , gap: 20, alignItems: "center"}}>
         <View>
-          <Image source={{ uri: album.image }} style={{ width: 100, height: 100 }} />
+          <Image source={{ uri: albumChill.image }} style={{ width: 100, height: 100 }} />
         </View>
         <View>
-          <Text style={styles.nameText}>{album.name}</Text>
-          <Text style={styles.tracks}>{album.artist}</Text>
+          <Text style={styles.nameText}>{albumChill.name}</Text>
+          <Text style={styles.tracks}>{albumChill.artist}</Text>
           <View style={styles.soundCloud}>
             <View style={styles.soundCloudLogoContainer}>
               <Fontisto name="soundcloud" size={24} color="white" />
@@ -93,7 +93,7 @@ const DetailAlbum = ({ route, navigation }) => {
 
       <View>
       <FlatList
-          data={album.songs} 
+          data={albumChill.songs} 
           renderItem={render}
           keyExtractor={(item, index) => index.toString()}
         />
@@ -184,4 +184,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default DetailAlbum;
+export default DetailAlbumChill;

@@ -18,6 +18,9 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import albumData from "../data-json/album.json"; 
 import PopularAlbum from "../components/PopularAlbum";
 
+import albumChill from "../data-json/albumChill.json"
+import AlbumChill from "../components/AlbumChill";
+
 const Home = ({navigation}) => {
   const greetingMessage = () => {
     const currentTime = new Date().getHours();
@@ -73,6 +76,17 @@ const Home = ({navigation}) => {
           )}
         />
         
+        <Text style={styles.Title}>Chill</Text>
+        <FlatList
+          data={albumChill} // Sử dụng dữ liệu từ album.json
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item) => item.id.toString()} // Xác định key cho mỗi item trong danh sách
+          renderItem={({ item }) => (
+            <AlbumChill item={item}  navigation ={navigation} />
+          )}
+        />
+
         
       </ScrollView>
     </SafeAreaView>
