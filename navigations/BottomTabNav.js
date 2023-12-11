@@ -26,7 +26,7 @@ const screenOptions = {
     elevation: 0,
     height: 60,
     backgroundColor: COLORS.white,
-    padding: 10,
+    paddingBottom: 0,
   },
 };
 const BottomTabNav = () => {

@@ -15,13 +15,13 @@ import { Ionicons } from '@expo/vector-icons';
 import COLORS from "../constants/colors";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import albumData from "../data-json/album.json"; 
+import albumData from "../data-json/album.json";
 import PopularAlbum from "../components/PopularAlbum";
 
 import albumChill from "../data-json/albumChill.json"
 import AlbumChill from "../components/AlbumChill";
 
-const Home = ({navigation}) => {
+const Home = ({ navigation }) => {
   const greetingMessage = () => {
     const currentTime = new Date().getHours();
     if (currentTime < 12) {
@@ -58,13 +58,13 @@ const Home = ({navigation}) => {
               <Image
                 style={styles.imgAvatar}
                 source={{
-                  uri: "https://scontent.fhan18-1.fna.fbcdn.net/v/t39.30808-6/332339988_911941676608916_4773911433797269542_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=fryArG6GaQQAX9FZaIz&_nc_ht=scontent.fhan18-1.fna&oh=00_AfA8X21eafBpOAWK1k6WHNaFOF9tPSQTFZF6svKbIGUK4g&oe=6549AA23",
+                  uri: "https://scontent.fhan14-4.fna.fbcdn.net/v/t39.30808-6/332339988_911941676608916_4773911433797269542_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=5f2048&_nc_ohc=429skGamyOUAX__Xy2H&_nc_ht=scontent.fhan14-4.fna&oh=00_AfDm4FXf6H3R6Jbh85RNn_qJtaDxfiY8lWC65eGwTyZ2ag&oe=656753E3",
                 }}
               />
             </TouchableOpacity>
           </View>
         </View>
-        
+
         <Text style={styles.Title}>Popular Album</Text>
         <FlatList
           data={albumData} // Sử dụng dữ liệu từ album.json
@@ -72,10 +72,17 @@ const Home = ({navigation}) => {
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id.toString()} // Xác định key cho mỗi item trong danh sách
           renderItem={({ item }) => (
-            <PopularAlbum item={item}  navigation ={navigation} />
+            <PopularAlbum item={item} navigation={navigation} />
           )}
         />
-        
+
+
+        <Image
+          style={{ height: 250, width: "100%" }}
+          source={require("../assets/img/poster2.jpg")}
+        />
+
+
         <Text style={styles.Title}>Chill</Text>
         <FlatList
           data={albumChill} // Sử dụng dữ liệu từ album.json
@@ -83,11 +90,10 @@ const Home = ({navigation}) => {
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id.toString()} // Xác định key cho mỗi item trong danh sách
           renderItem={({ item }) => (
-            <AlbumChill item={item}  navigation ={navigation} />
+            <AlbumChill item={item} navigation={navigation} />
           )}
         />
 
-        
       </ScrollView>
     </SafeAreaView>
   );
@@ -119,6 +125,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     resizeMode: "cover",
     marginRight: 10,
+    
   },
   messageDay: {
     marginLeft: 10,
@@ -126,7 +133,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     flex: 1,
   },
-  
+
   Title: {
     marginLeft: 20,
     fontSize: 22,

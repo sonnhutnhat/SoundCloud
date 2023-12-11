@@ -1,53 +1,76 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, Pressable, TouchableOpacity, StyleSheet, SafeAreaView, Animated } from "react-native"; // Add Animated import
+import { View, Text, Image, Pressable, TouchableOpacity, StyleSheet, SafeAreaView, Animated } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo, Feather, Ionicons, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { Audio } from 'expo-av';
 
-
 // Define circleSize here
 const circleSize = 12;
 
 const SongMusic = ({ route }) => {
-  const { song } = route.params;
-  console.log(song.path);
+  const { album } = route.params;
   const navigation = useNavigation();
 
-  // Add the missing variables (replace with your actual logic)
-  const progress = 0.5;
-  const currentTime = 0;
-  const totalDuration = 100;
-
-  const [sound, setSound] = useState(); // Add state for the sound
+  const [sound, setSound] = useState();
   const [playing, setPlaying] = useState(false);
-  const [currentSong, setCurrentSong] = useState(null); // Add state for the current song
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [totalDuration, setTotalDuration] = useState(0);
 
   useEffect(() => {
     return sound
-    ? () => {
-      sound.unloadAsync();
-    }
-    : undefined;
+      ? () => {
+          sound.unloadAsync();
+        }
+      : undefined;
   }, [sound]);
-  const PlaySong = async () => {
-    if(sound) {
-      if(playing) {
+
+  const PlaySong = async (path, index) => {
+    if (sound) {
+      if (playing) {
         await sound.pauseAsync();
       } else {
         await sound.playAsync();
       }
       setPlaying(!playing);
     } else {
-      const {sound: newSound} = await Audio.Sound.createAsync(
-        {uri: song.path},
-        {shouldPlay: true}
+      const { sound: newSound } = await Audio.Sound.createAsync(
+        { uri: path },
+        { shouldPlay: true },
+        (status) => {
+          if (status.isLoaded) {
+            setTotalDuration(status.durationMillis);
+          }
+        }
       );
+      newSound.setOnPlaybackStatusUpdate((status) => {
+        if (status.isLoaded) {
+          setCurrentTime(status.positionMillis);
+        }
+      });
       setSound(newSound);
       setPlaying(true);
     }
+    setCurrentSongIndex(index);
   };
 
+  const handleNextSong = () => {
+    if (album && album.songs && currentSongIndex + 1 < album.songs.length) {
+      const nextSong = album.songs[currentSongIndex + 1];
+      setCurrentSongIndex((prevIndex) => prevIndex + 1);
+      PlaySong(nextSong.path, currentSongIndex + 1);
+    }
+  };
+  
+  const handlePreviousSong = () => {
+    if (album && album.songs && currentSongIndex > 0) {
+      const previousSong = album.songs[currentSongIndex - 1];
+      setCurrentSongIndex((prevIndex) => prevIndex - 1);
+      PlaySong(previousSong.path, currentSongIndex - 1);
+    }
+  };
+  
 
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60000);
@@ -149,11 +172,11 @@ const SongMusic = ({ route }) => {
             <Entypo name="dots-three-vertical" size={24} color="white" />
           </View>
           <View style={styles.content}>
-            <Image style={styles.albumImage} source={{ uri: song.image }} />
+            <Image style={styles.albumImage} source={{ uri: route.params.song.image }} />
             <View style={styles.infoContainer}>
               <View style={styles.textContainer}>
-                <Text style={styles.title}>{song.name}</Text>
-                <Text style={styles.artist}>{song.artist}</Text>
+                <Text style={styles.title}>{route.params.song.name}</Text>
+                <Text style={styles.artist}>{route.params.song.artist}</Text>
               </View>
               <View style={styles.actions}>
                 <TouchableOpacity>
@@ -165,7 +188,10 @@ const SongMusic = ({ route }) => {
             <View style={styles.progressBarContainer}>
               <View style={styles.progressBar}>
                 <View
-                  style={styles.progressIndicator}
+                  style={{
+                    ...styles.progressIndicator,
+                    width: `${(currentTime / totalDuration) * 100}%`,
+                  }}
                 />
               </View>
               <View style={styles.timeContainer}>
@@ -177,21 +203,17 @@ const SongMusic = ({ route }) => {
               <Pressable>
                 <Entypo name="shuffle" size={26} color="white" />
               </Pressable>
-              <Pressable>
+              <Pressable onPress={handlePreviousSong}>
                 <Ionicons name="play-skip-back" size={30} color="white" />
               </Pressable>
-              <TouchableOpacity onPress={() => PlaySong(song.path, song.id)}>
+              <TouchableOpacity onPress={() => PlaySong(route.params.song.path, currentSongIndex)}>
                 {playing ? (
                   <AntDesign name="pausecircleo" size={60} color="white" />
                 ) : (
-                  <TouchableOpacity
-                    onPress={PlaySong}
-                  >
-                    <AntDesign name="playcircleo" size={60} color="white" />
-                  </TouchableOpacity>
+                  <AntDesign name="playcircleo" size={60} color="white" />
                 )}
               </TouchableOpacity>
-              <Pressable>
+              <Pressable onPress={handleNextSong}>
                 <Ionicons name="play-skip-forward" size={30} color="white" />
               </Pressable>
               <Pressable>
