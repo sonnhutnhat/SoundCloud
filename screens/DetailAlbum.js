@@ -101,7 +101,6 @@ const DetailAlbum = ({ route, navigation }) => {
       // Thực hiện xử lý khi ấn nút "Like"
       // Ví dụ: Thêm bài hát vào danh sách yêu thích
       addLikedSong(selectedSong);
-      navigation.navigate('Profile');
     }
     console.log(`Performing action: ${action}`);
   };

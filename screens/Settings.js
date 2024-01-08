@@ -50,7 +50,14 @@ const Settings = ({ navigation }) => {
   };
 
   const logout = () => {
+    // Thực hiện bất kỳ logic đăng xuất nếu cần
     console.log("Logout");
+
+    // Đặt lại stack điều hướng về trang đăng nhập
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }] // Thay 'Login' bằng tên của trang đăng nhập của bạn
+    });
   };
 
   const accountItems = [

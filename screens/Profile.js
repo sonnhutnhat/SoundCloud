@@ -1,20 +1,41 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, SafeAreaView, FlatList } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
-import { SimpleLineIcons } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
-import { Octicons } from '@expo/vector-icons';
-import { useAppContext } from '../ContextAPI/AppContext'
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { Entypo, SimpleLineIcons, FontAwesome, Octicons } from '@expo/vector-icons';
+import { useAppContext } from '../ContextAPI/AppContext';
 
 const Profile = ({ navigation }) => {
-  const { likedSongs } = useAppContext();
+  const { likedSongs, removeLikedSong } = useAppContext();
+  const [menuVisibility, setMenuVisibility] = useState({});
 
   const handleLikedSongPress = (song) => {
-    // Xử lý khi bài hát yêu thích được nhấp vào
     console.log(`Liked song pressed: ${song.nameSong}`);
   };
 
+  const toggleMenu = (itemId) => {
+    console.log("Toggling menu for item ID:", itemId);
+    setMenuVisibility((prevMenuVisibility) => ({
+      ...prevMenuVisibility,
+      [itemId]: !prevMenuVisibility[itemId],
+    }));
+  };
+
+
   const renderLikedSong = ({ item }) => {
+    const handleToggleMenu = (itemId) => {
+      console.log("Toggling menu for item ID:", itemId);
+      setMenuVisibility((prevMenuVisibility) => ({
+        ...prevMenuVisibility,
+        [itemId]: !prevMenuVisibility[itemId],
+      }));
+    };
+  
+    const handleRemoveSong = (song) => {
+      console.log("Removing song:", song);
+      console.log(song.id)
+      removeLikedSong(song.id);
+      handleToggleMenu(song.id);
+    };
+  
     return (
       <TouchableOpacity
         onPress={() => {
@@ -23,7 +44,7 @@ const Profile = ({ navigation }) => {
         }}
       >
         <View style={styles.likedSongItem}>
-          <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <View style={{ paddingRight: 10 }}>
               <Image style={{ width: 60, height: 60, borderRadius: 6 }} source={{ uri: item.image }} />
             </View>
@@ -33,7 +54,18 @@ const Profile = ({ navigation }) => {
             </View>
           </View>
           <View style={styles.likedSongOptions}>
-            <Entypo name="dots-three-horizontal" size={20} color="grey" style={styles.optionsIcon} />
+            <Entypo
+              name="dots-three-horizontal"
+              size={20}
+              color="grey"
+              onPress={() =>  handleToggleMenu(item.id)}
+              style={styles.optionsIcon}
+            />
+            {menuVisibility[item.id] && (
+              <TouchableOpacity onPress={() => handleRemoveSong(item)}>
+                <Text style={{ color: 'red', marginLeft: 10 }}>Delete</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </TouchableOpacity>
@@ -88,8 +120,9 @@ const Profile = ({ navigation }) => {
         <FlatList
           data={likedSongs}
           renderItem={renderLikedSong}
-          keyExtractor={(item) => (item.id ? item.id.toString() : Math.random().toString())}
+          keyExtractor={(item, index) => index.toString()}
         />
+
       </View>
     </View>
   );

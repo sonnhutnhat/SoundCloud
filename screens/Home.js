@@ -43,7 +43,7 @@ const Home = ({ navigation }) => {
           <TouchableOpacity style={styles.iconContainer}>
             <MaterialCommunityIcons name="cast-connected" size={24} color="#333" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.iconContainer}>
+          <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.navigate("Messages")}>
             <Ionicons name="mail-outline" size={24} color="black" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconContainer}>
